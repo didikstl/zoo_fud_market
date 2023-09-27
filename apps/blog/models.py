@@ -39,7 +39,7 @@ class Article(models.Model):
         verbose_name_plural = 'Статьи'
 
 class Tag(models.Model):
-    tag = models.CharField(verbose_name='TAG', max_length=100, db_index=True)
+    tag = models.CharField(verbose_name='tag', max_length=100, db_index=True)
     slug = models.SlugField(max_length=255, unique=True, db_index=True)
 
     def __str__(self):
@@ -47,8 +47,8 @@ class Tag(models.Model):
 
 
     class Meta:
-        verbose_name = 'TAG'
-        verbose_name_plural = 'TAGS'
+        verbose_name = 'tag'
+        verbose_name_plural = 'tags'
 
 
 
