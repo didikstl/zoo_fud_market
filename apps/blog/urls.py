@@ -6,5 +6,4 @@ urlpatterns = [
     path('<int:category_id>/', article_list, name='blog_article_list'),
     path('tag/<int:tag_id>/', tag_search_view, name='tag_search_view'),
     path('<int:category_id>/<int:article_id>/', article_view, name='blog_article_view'),
-
 ]
