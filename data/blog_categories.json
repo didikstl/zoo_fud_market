@@ -12,26 +12,6 @@
     "fields": {
       "name": "Красота и здоровье"
     }
-  },
-  {
-    "model": "blog.blogcategory",
-    "pk": 6,
-    "fields": {
-      "name": "О нем"
-    }
-  },
-  {
-    "model": "blog.blogcategory",
-    "pk": 7,
-    "fields": {
-      "name": "О ней"
-    }
-  },
-  {
-    "model": "blog.blogcategory",
-    "pk": 8,
-    "fields": {
-      "name": "Гороскоп"
-    }
   }
+
 ]

@@ -1,15 +1,21 @@
-<h2>{{ article.title }}</h2>
+{% extends 'base.html' %}
+{% block content %}
+    <h2>{{ article.title }}</h2>
+    <img class='img-thumbnail' src="{{ article.image.url }}" alt="">
 
-<p>{{ article.text }}</p>
+    <p>{{ article.text }}</p>
 
-<p>
-    {% for tag in article.tags.all %}
-        <a href="{% url 'tag_search_view' tag_id=tag.id %}">#{{ tag.name }}</a>
-    {% endfor %}
+    <p>
+        {% for tag in article.tags.all %}
+            <a href="{% url 'tag_search_view' tag_id=tag.id %}">#{{ tag.name }}</a>
+        {% endfor %}
 
-</p>
+    </p>
+    <p style="text-align: right">
+        Дата: <b>{{ article.publish_date }}</b>
+        Категория: <b>{{ category.name }}</b>
+    </p>
+{% endblock %}
 
-<p style="text-align: right">
-    Дата: <b>{{ article.publish_date }}</b>
-    Категория: <b>{{ category.name }}</b>
-</p>
+
+
