@@ -1,6 +1,8 @@
 from django.db import models
 from imagekit.models import ProcessedImageField, ImageSpecField
 from pilkit.processors import ResizeToFill
+from django.utils.safestring import mark_safe
+from config.settings import MEDIA_ROOT
 
 
 class BlogCategory(models.Model):
@@ -24,7 +26,20 @@ class BlogCategory(models.Model):
 
     class Meta:
         verbose_name = 'Категория блога'
-        verbose_name_plural = 'Категории блога'
+        verbose_name_plural = 'Категория блога'
+
+
+    def image_tag_thumbnail(self):
+        if self.image:
+            return mark_safe(f'<img src="/{MEDIA_ROOT}{self.image}" width="70">')
+
+    image_tag_thumbnail.short_description = 'Изображение'
+
+    def image_tag(self):
+        if self.image:
+            return mark_safe(f'<img src="/{MEDIA_ROOT}{self.image}">')
+
+    image_tag.short_description = 'Изображение'
 
 
 class Article(models.Model):
