@@ -17,6 +17,26 @@
         Дата: <b>{{ article.publish_date }}</b>
         Категория: <b>{{ category.name }}</b>
     </p>
+
+
+    {% if article.user %}
+        <div class="text-end">
+            <div class="author">
+                {% if article.user.image %}
+                	<span class="avatar">
+                        <img src="{{ article.user.image_thumbnail.url }}" alt="">
+                    </span>
+                {% endif %}
+                {% if article.user.first_name %}
+                	<span class="author-name">{{ article.user.first_name }} {{ article.user.last_name }}</span>
+                {% else %}
+                    <span class="author-name">{{ article.user.username }}</span>
+                {% endif %}
+
+            </div>
+        </div>
+
+    {% endif %}
 {% endblock %}
 
 
