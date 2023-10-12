@@ -11,7 +11,7 @@ admin.site.register(Tag)
 class BlogCategoryAdmin(admin.ModelAdmin):
     list_display = ['id', 'name', 'image_tag_thumbnail', 'article_count']
     list_display_links = ['id', 'name']
-    fields = ['name', 'image_tag', 'image']
+    fields = ['name', 'image_tag', 'image', 'meta_title', 'meta_description', 'meta_keywords']
     readonly_fields = ['image_tag']
 
     def article_count(self, instance):
