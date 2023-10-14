@@ -133,6 +133,12 @@ class Product(MetaTagMixin):
         if image:
             return image.image_tag_thumbnail()
 
+    def main_category(self):
+        category = self.categories.filter(productcategory__is_main=True).first()
+        if category:
+            return category
+        return self.categories.first()
+
     def __str__(self):  # Возвращает название товара в виде строки.
         return self.name
 
