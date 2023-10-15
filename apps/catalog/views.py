@@ -19,10 +19,27 @@ class ProductsByCategoryView(generic.ListView):
         queryset = Product.objects.filter(categories=self.category)
         return queryset
 
+
+    def set_breadcrumbs(self):
+        breadcrumbs = {reverse('catalog'): 'Каталог'}
+
+        category = self.category
+        categories = []
+        parent = category.parent
+        while parent is not None:
+            categories.append((reverse('categories', args=[parent.slug]), parent.name))
+            parent = parent.parent
+        for key, value in categories[::-1]:
+            breadcrumbs.update({key: value})
+        breadcrumbs.update({'current': self.category.name})
+        return breadcrumbs
+
+
     def get_context_data(self, **kwargs):
-        context = super(ProductsByCategoryView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context['category'] = self.category
         context['categories'] = self.categories
+        context['breadcrumbs'] = self.set_breadcrumbs()
         return context
 
 
@@ -35,7 +52,6 @@ class ProductDetailView(generic.DetailView):
 
         category = self.object.main_category()
         if category:
-
             categories = [(reverse('categories', args=[category.slug]), category.name)]
             parent = category.parent
             while parent is not None:
