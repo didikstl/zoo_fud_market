@@ -11,7 +11,11 @@ class LoginForm(forms.Form):
 class RegisterForm(forms.ModelForm):
     password_confirm = forms.CharField(required=True, max_length=64, widget=forms.PasswordInput)
 
-
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        check = User.objects.filter(email=email)
+        if check:
+            raise forms.ValidationError('Пользователь с таким E-mail уже существует')
 
 
     class Meta:
