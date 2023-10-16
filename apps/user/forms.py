@@ -16,7 +16,14 @@ class RegisterForm(forms.ModelForm):
         check = User.objects.filter(email=email)
         if check:
             raise forms.ValidationError('Пользователь с таким E-mail уже существует')
+        return email
 
+    def clean_password_confirm(self):
+        password = self.cleaned_data['password']
+        password_confirm = self.cleaned_data['password_confirm']
+        if password_confirm == password:
+            return password_confirm
+        raise forms.ValidationError('Пароли не совпадают')
 
     class Meta:
         model = User

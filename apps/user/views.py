@@ -20,11 +20,18 @@ def user_login(request):
 
 
 def user_register(request):
+    error = None
     if request.method == 'POST':
-        form = RegisterForm(request.POST)
+        form = RegisterForm(request.POST, request.FILES)
         if form.is_valid():
             user = form.save(commit=False)
             user.set_password(form.cleaned_data['password'])
             user.save()
             return render(request, 'user/welcome.html', {'user':user})
-    return render(request, 'user/register.html')
+        error = form.errors
+    return render(request, 'user/register.html', {'error': error})
+
+
+def user_logout(request):
+    logout(request)
+    return redirect('index')
