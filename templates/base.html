@@ -28,7 +28,14 @@
         <div class="col-6">
             <img src="{% static 'img/logo.png' %}" alt="" id="logo">
         </div>
-        <div class=".col-3"><p class="header-text">Корм для животных</p></div>
+        <div class=".col-3">
+            <p class="header-text">Корм для животных</p>
+            {% if request.user.is_authenticated %}
+                <p class= "text_end">Привет, {{ request.user.username }} (<a href="{% url 'logout' %}">Выйти</a>) </p>
+            {% else %}
+                <p class= "text_end"><a href="{% url 'login' %}">Войти</a>&nbsp;<a href="{% url 'register' %}">Зарегистрироваться</a></p>
+            {% endif %}
+        </div>
     </div>
     <div class="row main-menu">
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
