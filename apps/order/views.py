@@ -34,3 +34,10 @@ def add_to_cart(request):
             'order/added.html',
             {'product': cd['product'], 'cart': get_car_data(cd['user'])}
         )
+
+
+@login_required
+def cart_view(request):
+    cart = get_car_data(request.user)
+    breadcrumbs = {'current': 'Корзина'}
+    return render(request, 'order/cart.html', {'cart': cart, 'breadcrumbs': breadcrumbs})
