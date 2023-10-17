@@ -31,9 +31,10 @@
         <div class=".col-3">
             <p class="header-text">Корм для животных</p>
             {% if request.user.is_authenticated %}
-                <p class= "text_end">Привет, {{ request.user.username }} (<a href="{% url 'logout' %}">Выйти</a>) </p>
+                <p class="text_end">Привет, {{ request.user.username }} (<a href="{% url 'logout' %}">Выйти</a>) </p>
             {% else %}
-                <p class= "text_end"><a href="{% url 'login' %}">Войти</a>&nbsp;<a href="{% url 'register' %}">Зарегистрироваться</a></p>
+                <p class="text_end"><a href="{% url 'login' %}">Войти</a>&nbsp;<a href="{% url 'register' %}">Зарегистрироваться</a>
+                </p>
             {% endif %}
         </div>
     </div>
@@ -46,15 +47,24 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/">Главная</a>
+                        <li class="nav-item text-primary">
+                            <a class="nav-link" href="/"><b>Главная</b></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'blog_category_list' %}">Блог</a>
+                            <a class="nav-link text-primary" href="{% url 'blog_category_list' %}"><r>Блог</r></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'catalog' %}">Каталог магазина</a>
+                            <a class="nav-link text-primary" href="{% url 'catalog' %}"><r>Каталог магазина</r></a>
                         </li>
+                    </ul>
+                </div>
+                <div class="flex">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        {% if request.user.is_authenticated %}
+                            <li class="nav-item">
+                                <a class="nav-link text-primary" href="{% url 'cart' %}"><b>Корзина</b></a>
+                            </li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
