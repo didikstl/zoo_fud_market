@@ -5,7 +5,6 @@ from apps.user.models import User
 from phonenumber_field.modelfields import PhoneNumberField
 
 
-
 class Cart(models.Model):
     product = models.ForeignKey(Product, verbose_name='Товар', on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(verbose_name='Количество')
@@ -31,3 +30,17 @@ class Order(models.Model):
     class Meta:
         verbose_name = 'Заказ'
         verbose_name_plural = 'Заказы'
+
+
+class OrderProduct(models.Model):
+    order = models.ForeignKey(Order, verbose_name='Заказ', on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, verbose_name='Товар', null=True, on_delete=models.SET_NULL)
+    price = models.DecimalField(verbose_name='Цена', max_digits=12, decimal_places=2)
+    quantity = models.PositiveIntegerField(verbose_name='Количество')
+
+    class Meta:
+        verbose_name = 'Товар заказ'
+        verbose_name_plural = 'Товары заказ'
+
+
+
